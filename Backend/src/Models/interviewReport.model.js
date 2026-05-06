@@ -1,22 +1,5 @@
 const mongoose=require("mongoose")
 
-/**
- * --job description: String
- * --resume text: String
- * self desription:String
- * 
- * matchScore: Number
- * technical question:[{question:"",
-                    *  intention:"",
-                    * answer:""}]
- * behavioral questions:[]
- * skills gaps:[]
- * preperation plans:[{
- *          day:Number,
- *          focus:String,
- *          task:[String]
- * }]
- */
 const technicalQuestionsSchema=new mongoose.Schema({
     question:{
         type:String,
@@ -95,8 +78,16 @@ const interviewReportSchema= new mongoose.Schema({
     },
     technicalQuestions:[technicalQuestionsSchema],
     behavioralQuestions:[behavioralQuestionsSchema],
-    skillsGaps:[skillGapsSchema],
-    preparationPlan:[preparationPlanSchema]
+    skillGaps:[skillGapsSchema],
+    preparationPlan:[preparationPlanSchema],
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"users"
+    },
+    title: {
+        type: String,
+        required: [ true, "Job title is required" ]
+    }
 },{
     timestamps:true
 })
